@@ -7,7 +7,6 @@ fn main() {
 
     let connection = &mut establish_connection();
     let results = messages
-        .filter(published.eq(true))
         .limit(5)
         .select(Message::as_select())
         .load(connection)
@@ -15,8 +14,8 @@ fn main() {
 
     println!("Displaying {} posts", results.len());
     for message in results {
-        println!("{}", message.name);
+        println!("{}", message.id);
         println!("----------\n");
-        println!("{}", post.body);
+        println!("{}", message.username);
     }
 }
